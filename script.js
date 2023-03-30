@@ -2,14 +2,18 @@ const RAMDOM_SENTENCE_URL_API = "https://api.quotable.io/random";
 const typeDisplay = document.getElementById("typeDisplay");
 const typeInput = document.getElementById("typeInput");
 const timer = document.getElementById("timer");
+const btn = document.getElementById("btn");
+const pTag = document.getElementById("pTag");
 
 const typeSound = new Audio("./audio/typing-sound.mp3");
 const wrongSound = new Audio("./audio/wrong.mp3");
 const correctSound = new Audio("./audio/correct.mp3");
 
-/* inputテキストの入力が合っているかの判定 */
+btn.addEventListener("click", RenderNextSentence);
+
+/* Judge if input letter is correct or not */
 typeInput.addEventListener("input", () => {
-  /* タイプ音をつける */
+  /* Adding typing sound */
   typeSound.play();
   typeSound.currentTime = 0;
 
@@ -44,21 +48,21 @@ typeInput.addEventListener("input", () => {
   }
 });
 
-/* 非同期でランダムな文章を取得する */
+/* Get random sentences with async */
 function GetRandomSentence() {
   return fetch(RAMDOM_SENTENCE_URL_API)
     .then((response) => response.json())
     .then((data) => data.content);
 }
 
-/* ランダムな文章を表示する */
+/* Display sentences picked up randomly */
 async function RenderNextSentence() {
   const sentence = await GetRandomSentence();
   // console.log(sentence);
 
   typeDisplay.innerText = "";
 
-  /* 文章を1文字ずつ分解して、spanタグを生成する */
+  /* Split a sentence into each letter and put each letter in a span tag */
   let oneText = sentence.split("");
 
   // console.log(oneText);
@@ -71,22 +75,27 @@ async function RenderNextSentence() {
     // characterSpan.classList.add("correct");
   });
 
-  /* テキストボックスの中身を消す */
+  /* Delete a value of textarea */
   typeInput.value = "";
 
   StartTimer();
+  typeInput.focus();
+  if (!pTag.classList.contains("invisible")) {
+    pTag.classList.add("invisible");
+  }
 }
 
 let startTime;
 let originTime = 30;
 
 function StartTimer() {
-  timer.innerText = originTime;
+  timer.innerText = "Remaining Time: 30";
   startTime = new Date();
   // console.log(startTime);
   setInterval(() => {
-    timer.innerText = originTime - getTimerTime();
-    if (timer.innerText <= 0) TimeUp();
+    const remainingTime = originTime - getTimerTime();
+    timer.innerText = `Remaining Time: ${remainingTime}`;
+    if (remainingTime <= 0) TimeUp();
   }, 1000);
 
   function getTimerTime() {
@@ -97,5 +106,3 @@ function StartTimer() {
     RenderNextSentence();
   }
 }
-
-RenderNextSentence();
