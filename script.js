@@ -2,14 +2,18 @@ const RAMDOM_SENTENCE_URL_API = "https://api.quotable.io/random";
 const typeDisplay = document.getElementById("typeDisplay");
 const typeInput = document.getElementById("typeInput");
 const timer = document.getElementById("timer");
-const btn = document.getElementById("btn");
+const startbtn = document.getElementById("startbtn");
+const stopbtn = document.getElementById("stopbtn");
 const pTag = document.getElementById("pTag");
 
 const typeSound = new Audio("./audio/typing-sound.mp3");
 const wrongSound = new Audio("./audio/wrong.mp3");
 const correctSound = new Audio("./audio/correct.mp3");
 
-btn.addEventListener("click", RenderNextSentence);
+// Start a typing game by press a start button
+startbtn.addEventListener("click", RenderNextSentence);
+// Stop a typing game by press a start button
+stopbtn.addEventListener("click", reload);
 
 /* Judge if input letter is correct or not */
 typeInput.addEventListener("input", () => {
@@ -105,4 +109,9 @@ function StartTimer() {
   function TimeUp() {
     RenderNextSentence();
   }
+}
+
+// Reloads the current page
+function reload() {
+  location.reload();
 }

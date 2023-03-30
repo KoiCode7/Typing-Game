@@ -11,11 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(
-    to left top,
-    rgb(223, 238, 20),
-    rgb(17, 156, 221)
-  );
+  background: linear-gradient(to left top, rgb(223, 238, 20), rgb(17, 156, 221));
   font-family: "Poppins", sans-serif;
 }
 
@@ -25,9 +21,8 @@ body {
   font-weight: 600;
   padding: 2rem;
   border-radius: 0.5rem;
-width: 90%;
-  min-height: 300px;
-  max-width: 90%;
+  width: 90%;
+  height: 50%;
   box-shadow: 1px 5px 6px rgb(80, 80, 80);
 }
 
@@ -51,9 +46,9 @@ width: 90%;
 }
 
 .timer {
-  /* position: absolute;
-  top: .8rem; */
   width: 90%;
+  height: 9%;
+
   font-size: 3rem;
   font-weight: bold;
   color: rgb(184, 37, 37);
@@ -61,8 +56,8 @@ width: 90%;
 
 .pTag {
   width: 90%;
-  /* position: absolute;
-  top: 4.5rem; */
+  height: 14%;
+
   font-size: 1rem;
   background: #fff;
   padding: 0.5rem 1rem;
@@ -75,17 +70,23 @@ width: 90%;
   margin-left: 1rem;
 }
 
-.btn {
-  /* position: absolute;
-  bottom: 1rem; */
+.startbtn,
+.stopbtn {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 10px;
   background: #efc807;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   width: 80%;
+  height: 8%;
+  line-height: 8%;
+  text-align: center;
   cursor: pointer;
+}
+
+.stopbtn {
+  background: #fff;
+  margin-bottom: 8px;
 }
 
 .correct {
